@@ -24,3 +24,21 @@ libraryDependencies ++= {
 
 fork in Test := true
 javaOptions in Test ++= Seq("-Dconfig.file=conf/app.conf")
+
+scalacOptions ++= Seq(
+  "-Ywarn-dead-code",
+  "-Ywarn-infer-any",
+  "-Ywarn-unused-import",
+  //"-Xfatal-warnings",
+  "-Xlint"
+)
+
+scalastyleFailOnError := true
+scalastyleFailOnWarning := true
+
+// Create a default Scala style task to run with tests
+lazy val compileScalastyle = taskKey[Unit]("compileScalastyle")
+
+compileScalastyle := scalastyle.in(Compile).toTask("").value
+
+(compileInputs in(Compile, compile)) := ((compileInputs in(Compile, compile)) dependsOn compileScalastyle).value

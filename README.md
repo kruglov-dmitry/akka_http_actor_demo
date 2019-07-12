@@ -12,6 +12,12 @@ SBT 0.13.17
 ```bash
 sbt assembly
 ```
+NOTE: we will use scalastyleschecks to ensure code style conformance
+In order to re-generate scalastyleconfig use following command:
+```bash
+sbt scalastyleGenerateConfig
+```
+
 
 will create fat jar with all dependencies at `target/scala-2.11/akka_http_actor_demo-assembly-1.0.0.jar`
 
